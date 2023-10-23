@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Countdown Timer</title>
+</head>
+<body>
+  <div class="countdown">
+    <div class="countdown-content">
+      <p class="display-number" id="days">0</p>
+      <p class="display-text">Days</p>
+    </div>
+
+    <div class="countdown-content">
+      <p class="display-number" id="hours">0</p>
+      <p class="display-text">Hours</p>
+    </div>
+
+    <div class="countdown-content">
+      <p class="display-number" id="minutes">0</p>
+      <p class="display-text">Min</p>
+    </div>
+
+    <div class="countdown-content">
+      <p class="display-number" id="seconds">0</p>
+      <p class="display-text">Sec</p>
+    </div>
+  </div>
+
+  <script>
+    // Set the target date for the countdown (replace with your desired date)
+    const targetDate = new Date('2023-12-31T00:00:00').getTime();
+
+    // Update the countdown every second
+    const countdownInterval = setInterval(updateCountdown, 1000);
+
+    function updateCountdown() {
+      const currentDate = new Date().getTime();
+      const timeRemaining = targetDate - currentDate;
+
+      if (timeRemaining <= 0) {
+        // Countdown is over
+        clearInterval(countdownInterval);
+        document.getElementById('days').textContent = '0';
+        document.getElementById('hours').textContent = '0';
+        document.getElementById('minutes').textContent = '0';
+        document.getElementById('seconds').textContent = '0';
+      } else {
+        // Calculate days, hours, minutes, and seconds
+        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+        // Update the HTML elements with the new values
+        document.getElementById('days').textContent = days;
+        document.getElementById('hours').textContent = hours;
+        document.getElementById('minutes').textContent = minutes;
+        document.getElementById('seconds').textContent = seconds;
+      }
+    }
+
+    // Initial call to set the countdown
+    updateCountdown();
+  </script>
+</body>
+</html>
